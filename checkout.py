@@ -1,12 +1,20 @@
 import sys
 import os
 
-with open('header.txt', 'r') as file:
-    header = file.readlines()
+QUESTION_KEY = sys.argv[1]
+PROGRAM_DESCRIPTION = sys.argv[2:]
+
+try:
+    with open('header.txt', 'r') as file:
+        header = file.readlines()
+except:
+    DEFAULT_HEADER = ['# UFCG - P1\n', '# SEU NOME\n', '# ']
+    with open('header.txt', 'w') as file:
+        file.writelines(DEFAULT_HEADER)
 
 directories_before = os.listdir()
 
-os.system(f'p1 checkout {sys.argv[1]}')
+os.system(f'p1 checkout {QUESTION_KEY}')
 
 directories_after = os.listdir()
 
@@ -14,5 +22,5 @@ for dir in directories_after:
     if not dir in directories_before:
         with open(f'{dir}/{dir}.py', 'w') as file:
             file.writelines(header)
-            file.write(' '.join(sys.argv[2:]) + '\n')
+            file.write(' '.join(PROGRAM_DESCRIPTION) + '\n')
         exit(0)
