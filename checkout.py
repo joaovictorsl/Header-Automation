@@ -23,4 +23,6 @@ for dir in directories_after:
         with open(f'{dir}/{dir}.py', 'w') as file:
             file.writelines(header)
             file.write(' '.join(PROGRAM_DESCRIPTION) + '\n')
+        os.system(f'cd {dir};vim {dir}.py')
         exit(0)
+
